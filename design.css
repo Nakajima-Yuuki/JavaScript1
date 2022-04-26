@@ -26,6 +26,8 @@ body {
     margin-bottom: 5px;
     border-radius: 4px;
     cursor: pointer;
+    justify-content:center
+    
 }
 
 #_Answers:hover{
@@ -35,4 +37,17 @@ body {
 
 button{
     margin-left: 240px;
+    justify-content:center
+}
+
+#result{
+    display: none;
+    font-family: 'Yu Gothic UI',sans-serif;
+    font-size: 30px;
+    width: 400px;
+    margin: 250px auto;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 80px;
+
 }

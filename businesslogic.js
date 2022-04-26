@@ -5,7 +5,7 @@ var Questions = [];
 var CurrentQuestion = [];
 
 //変数answersAry正解した問題配列
-var answersAry = []
+var answersAry = [];
 
 
 
@@ -60,7 +60,6 @@ function setQuestion(number) {
     //関数呼び出し
     countQuestions(number)
     document.querySelector('#Answers').innerHTML = '';
-    document.querySelector('#result').innerHTML = '';
     //CurrentQuestion要素とnumberが等しいかそれ以下なら処理終了
     if (CurrentQuestion.length <= number) {
         return;
@@ -77,7 +76,7 @@ function setQuestion(number) {
         var button = document.createElement('button');
         button.innerHTML = question.selects[i];
         //setAttributeで属性を追加・変更
-        button.setAttribute('style', ' display:block ; min-width:300px;cursor:pointer; margin-top: 5px; ');
+        button.setAttribute('style', ' display:block ; min-width:300px;cursor:pointer; margin-top: 5px; margin-right: auto; margin-left: auto; ');
         //ボタンクリックイベント処理
         button.addEventListener('click', function () {
             judgeAnswer(number, question.selects[i])
@@ -93,7 +92,7 @@ function judgeAnswer(number, value) {
         //checkQuestion関数呼び出し
         checkQuestion(number, value)
         //idリザルトに表示
-        document.querySelector('#result').innerHTML = '';
+        // document.querySelector('#result').innerHTML = '';
         //問題数１づつ増やす
         setQuestion(number + 1)
         
@@ -119,30 +118,32 @@ function QuestionEntity(sentence, answer, wrong1, wrong2, wrong3) {
 
     //問題数カウント関数　numberは問題番号
 function countQuestions(number) {
-        //Questions.lengthから問題要素を取得してQuestions.lengthよりnumber問題番号が小さい場合処理を続ける
-        //カウントは0から始まるので+1している、Questions.lengthは問題数
-        if (number + 1 <= Questions.length) {
-            //文字列とQuestions.lengthを結合してHTMLに表示
-            document.querySelector('#count').innerHTML = (number + 1) + "問目 " + "/ 全 " + Questions.length + " 問中";
-            //そうじゃなければカウントを0にする
+    //Questions.lengthから問題要素を取得してQuestions.lengthよりnumber問題番号が小さい場合処理を続ける
+    //カウントは0から始まるので+1している、Questions.lengthは問題数
+    if (number + 1 <= Questions.length) {
+        //文字列とQuestions.lengthを結合してHTMLに表示
+        document.querySelector('#count').innerHTML = (number + 1) + "問目 " + "/ 全 " + Questions.length + " 問中";
+        //そうじゃなければカウントを0にする
     } else {
         document.querySelector('#Sentence').innerHTML = '';
         //解答数0初期値付与
         var AnswersCount = 0
-        
         //answerは解答要素　indexは問題番号要素
         //answersAry配列の中の要素分繰り返して要素がおわる所で終了する。（配列の各要素について繰り返し）
         answersAry.forEach((answer, index) => {
-            //答えが正しければカウントを増やす
+        //答えが正しければカウントを増やす
             if (answer.correctAnswer) {
                 AnswersCount++
-                
             }
             //すべての問題が完了した後に表示する
             //カウントは0から始まるので+1している
-            if (index + 1 == answersAry.length) {
-                
-                document.querySelector('#Sentence').innerHTML = "正解数は " + AnswersCount + " 問です!";
+            if (index + 1 == answersAry.length){
+                //HTML要素を取得する,noneを指定してswitc部分を非表示
+                document.querySelector('#switch').style.display = 'none';
+                //HTML要素result部分の取得、blockを指定してresult要素を表示
+                document.querySelector('#result').style.display = 'block';
+                //解答結果表示
+                document.querySelector('#result').innerHTML = "正解数は " + AnswersCount + " 問です!";
             }
         })
     }
